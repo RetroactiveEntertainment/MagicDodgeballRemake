@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float baseSpeed = 1f;
     [SerializeField] private float rotationSpeed = 0.1f; // Obsolete when using HandleLookInstant()
+    private IState rotator;
 
     public void OnMove(InputValue value)
     {
@@ -18,13 +19,13 @@ public class PlayerMovement : MonoBehaviour
     public void OnLook(InputValue value)
     {
         _lookInput = value.Get<Vector2>();
-        Debug.Log(_lookInput);
+        //Debug.Log(_lookInput);
     }
 
     private void FixedUpdate()
     {
         HandleMovement();
-        HandleLookInstant();
+        //HandleLookInstant();
     }
 
     private void HandleMovement()
