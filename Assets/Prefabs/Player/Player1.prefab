@@ -263,8 +263,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 5642812035055196760, guid: 2400c55d775fd6b4fb97f228d41ac871, type: 3}
   projectileSpawnPoint: {fileID: 1608954973974294000}
   modifiedProjectileData:
-    speed: 3
-    maxBounceCount: 3
+    speed: 6
+    maxBounceCount: 4
 --- !u!1 &9065328608918411717
 GameObject:
   m_ObjectHideFlags: 0
