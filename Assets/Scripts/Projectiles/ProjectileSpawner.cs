@@ -39,6 +39,7 @@ public class ProjectileSpawner
 
     private void RemoveProjectileFromAliveList(Projectile projectile)
     {
+        // Check if it exists, edge case!
         _projectiles.Remove(projectile);
     }
 

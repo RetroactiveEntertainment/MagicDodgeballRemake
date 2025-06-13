@@ -16,9 +16,8 @@ public class Projectile : MonoBehaviour
         InitializeValues();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        // Keep at constant speed while retaining direction
         rb.linearVelocity = projectileData.speed * rb.linearVelocity.normalized;
         _lastLinearVelocity = rb.linearVelocity;
     }

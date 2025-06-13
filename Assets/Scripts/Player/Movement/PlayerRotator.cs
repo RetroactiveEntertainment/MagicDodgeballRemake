@@ -10,8 +10,6 @@ public class PlayerRotator : MonoBehaviour
     private Vector2 _lookInput;
     [SerializeField] private Rigidbody rb;
 
-    private RotatorBase rotator;
-
     //[SerializeField] private float rotationSpeed = 0.1f; // Obsolete when using HandleLookInstant()
     private RotatorBase _currentRotator = null;
     [SerializeField] private PlayerInput playerInput;

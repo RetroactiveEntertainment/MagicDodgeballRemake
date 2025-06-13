@@ -12,7 +12,7 @@ public class GamepadRotator : RotatorBase, IState
     {
         if (lookInput.sqrMagnitude < 0.1f)
             return;
-
+        
         Vector3 lookDir = Vector3.left * lookInput.y + Vector3.forward * lookInput.x;
 
         Quaternion newRotation = Quaternion.LookRotation(lookDir, Vector3.up);
