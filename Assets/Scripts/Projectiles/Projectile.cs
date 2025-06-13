@@ -3,11 +3,15 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public const int PROJECTILE_IN_FOREIGN_AREA_LAYER = 9;
+    public const string BARRIER_TAG = "Barrier";
+
     [SerializeField] private ProjectileData projectileData;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Collider coll;
     private int _currentBounceCount = 0;
     private Vector3 _lastLinearVelocity; // Necessary to calculate reflection 
+
 
     public Action<Projectile> OnProjectileDeath;
 
@@ -41,14 +45,13 @@ public class Projectile : MonoBehaviour
     {
         // Deal damage
     }
-    
+
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Bruh");
-        if (other.CompareTag("Barrier"))
+        if (other.CompareTag(BARRIER_TAG))
         {
-            gameObject.layer = 9;
+            gameObject.layer = PROJECTILE_IN_FOREIGN_AREA_LAYER;
         }
     }
 
