@@ -6,8 +6,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private ProjectileData projectileData;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Collider coll;
-    private Vector3 _lastLinearVelocity; // Necessary to calculate reflection 
     private int _currentBounceCount = 0;
+    private Vector3 _lastLinearVelocity; // Necessary to calculate reflection 
 
     public Action<Projectile> OnProjectileDeath;
 
@@ -22,10 +22,9 @@ public class Projectile : MonoBehaviour
         _lastLinearVelocity = rb.linearVelocity;
     }
 
-    public void SetProjectileData(ProjectileData targetProjectileData)
+    public void OnDestroy()
     {
-        projectileData = new ProjectileData(targetProjectileData);
-        InitializeValues();
+        OnProjectileDeath?.Invoke(this);
     }
 
     private void OnCollisionEnter(Collision other)
@@ -42,14 +41,25 @@ public class Projectile : MonoBehaviour
     {
         // Deal damage
     }
+    
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Bruh");
+        if (other.CompareTag("Barrier"))
+        {
+            gameObject.layer = 9;
+        }
+    }
+
+    public void SetProjectileData(ProjectileData targetProjectileData)
+    {
+        projectileData = new ProjectileData(targetProjectileData);
+        InitializeValues();
+    }
 
     private void InitializeValues()
     {
         rb.linearVelocity = transform.forward * projectileData.speed;
-    }
-
-    public void OnDestroy()
-    {
-        OnProjectileDeath?.Invoke(this);
     }
 }
