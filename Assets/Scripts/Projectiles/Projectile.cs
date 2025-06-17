@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private Collider coll;
     private int _currentBounceCount = 0;
     private Vector3 _lastLinearVelocity; // Necessary to calculate reflection 
+    public int SpawnedByPlayerIndex;
 
 
     public Action<Projectile> OnProjectileDeath;
@@ -40,12 +41,6 @@ public class Projectile : MonoBehaviour
         rb.linearVelocity = projectileData.speed *
                             Vector3.Reflect(_lastLinearVelocity.normalized, other.contacts[0].normal);
     }
-
-    private void OnCollisionExit(Collision other)
-    {
-        // Deal damage
-    }
-
 
     private void OnTriggerExit(Collider other)
     {

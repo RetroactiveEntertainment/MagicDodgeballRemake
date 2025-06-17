@@ -4,16 +4,19 @@ using UnityEngine;
 public class ProjectileSpawner
 {
     private int _maxAllowedAliveProjectiles;
+    private int _playerIndex;
 
     private List<Projectile> _projectiles = new List<Projectile>();
 
-    public ProjectileSpawner()
-    {
-        _maxAllowedAliveProjectiles = 3;
-    }
 
     public ProjectileSpawner(int maxAllowedAliveProjectiles)
     {
+        _maxAllowedAliveProjectiles = maxAllowedAliveProjectiles;
+    }
+
+    public ProjectileSpawner(int playerIndex, int maxAllowedAliveProjectiles)
+    {
+        _playerIndex = playerIndex;
         _maxAllowedAliveProjectiles = maxAllowedAliveProjectiles;
     }
 
@@ -29,7 +32,8 @@ public class ProjectileSpawner
         projectile.SetProjectileData(projectileData);
         projectile.OnProjectileDeath += RemoveProjectileFromAliveList;
         _projectiles.Add(projectile);
-        Debug.Log($"Projectile count: {_projectiles.Count}");
+        projectile.SpawnedByPlayerIndex = _playerIndex;
+        //Debug.Log($"Projectile count: {_projectiles.Count}");
     }
 
     private bool CanSpawnNewProjectile()
@@ -51,5 +55,10 @@ public class ProjectileSpawner
     public void SetMaxAllowedAliveProjectiles(int maxAllowedAliveProjectiles)
     {
         _maxAllowedAliveProjectiles = maxAllowedAliveProjectiles;
+    }
+
+    public void SetPlayerIndex(int playerIndex)
+    {
+        _playerIndex = playerIndex;
     }
 }
